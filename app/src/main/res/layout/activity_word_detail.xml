@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="24dp"
-                    android:text="Check"
+                    android:text="More"
                     android:textColor="@color/white" />
 
                 <ImageView

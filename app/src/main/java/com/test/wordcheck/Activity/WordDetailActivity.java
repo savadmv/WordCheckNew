@@ -28,16 +28,25 @@ public class WordDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         apContext = (App) getApplication();
+
+        if (apContext.getWordResponse().getResults().size()>1){
+            actMore.setVisibility(View.VISIBLE);
+        }
+        else {
+            actMore.setVisibility(View.GONE);
+        }
+
         if (!apContext.getWordResponse().getResults().isEmpty())
             TvDefinition.setText("\""+apContext.getWordResponse().getResults().get(0).getDefinition()+"\"");
         else
             TvDefinition.setText("No result");
         Log.i(TAG, apContext.wordResponse.getWord());
 
-        TvWord.setText(apContext.getWordResponse().getWord());
+        TvWord.setText("\""+apContext.getWordResponse().getWord()+"\"");
         actMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent=new Intent(getApplicationContext(),MoreDefinitionActivity.class);
                 startActivity(intent);
             }

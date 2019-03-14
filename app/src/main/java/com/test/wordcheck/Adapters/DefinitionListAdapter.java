@@ -2,9 +2,11 @@ package com.test.wordcheck.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.test.wordcheck.Model.Result;
@@ -39,13 +41,22 @@ public class DefinitionListAdapter extends RecyclerView.Adapter<DefinitionListAd
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
         final Result result = dataSet.get(listPosition);
 
-
         TextView TvDefinition = holder.TvDefinition;
+        TextView TvDerivations = holder.TvDerivations;
+        LinearLayout DerivationLayout = holder.DerivationLayout;
+        TvDefinition.setText("\"" + result.getDefinition() + "\"");
 
-
-        TvDefinition.setText(result.getDefinition());
-
-
+        ArrayList<String> newDerivationList = new ArrayList<>();
+        newDerivationList.clear();
+        if (result.getDerivation() != null) {
+            DerivationLayout.setVisibility(View.VISIBLE);
+            for (String s : result.getDerivation()) {
+                newDerivationList.add("\"" + s + "\"");
+            }
+            TvDerivations.setText(TextUtils.join(",", newDerivationList));
+        } else {
+            DerivationLayout.setVisibility(View.GONE);
+        }
     }
 
 
@@ -74,11 +85,15 @@ public class DefinitionListAdapter extends RecyclerView.Adapter<DefinitionListAd
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView TvDefinition;
+        TextView TvDerivations;
+        LinearLayout DerivationLayout;
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
             this.TvDefinition = (TextView) itemView.findViewById(R.id.tv_definition);
+            this.TvDerivations = (TextView) itemView.findViewById(R.id.tv_derivations);
+            this.DerivationLayout = (LinearLayout) itemView.findViewById(R.id.ll_derivations);
         }
     }
 }
