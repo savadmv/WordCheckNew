@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Word Check</string>
+    <string name="test_definition_string">\"this is test for the text view word defmition to check if the alignment is correct or not\"</string>
+    <string name="test_word">\"My word\"</string>
 </resources>

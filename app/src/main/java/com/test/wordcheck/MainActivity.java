@@ -51,9 +51,14 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<WordResponse>() {
             @Override
             public void onResponse(Call<WordResponse> call, Response<WordResponse> response) {
-                apContext.setWordResponse(response.body());
-                Intent intent = new Intent(context, WordDetailActivity.class);
-                startActivity(intent);
+                if (response.code()==200) {
+                    apContext.setWordResponse(response.body());
+                    Intent intent = new Intent(context, WordDetailActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
